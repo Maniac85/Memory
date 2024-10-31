@@ -1,8 +1,10 @@
 package de.htwberlin.webtech.memory.controller;
 
 import de.htwberlin.webtech.memory.model.Highscore;
+import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,4 +29,14 @@ public class HighscoreController {
                 .map(h -> new Highscore(h.getPlayerName(), h.getScore(), null)) // Datum auf null setzen oder ignorieren
                 .toList();
     }
+
+    @PostConstruct
+    public void init() {
+        addHighscore(new Highscore("Alice", 150, LocalDateTime.now()));
+        addHighscore(new Highscore("Bob", 200, LocalDateTime.now()));
+        addHighscore(new Highscore("Charlie", 175, LocalDateTime.now()));
+        addHighscore(new Highscore("David", 120, LocalDateTime.now()));
+        addHighscore(new Highscore("Eve", 190, LocalDateTime.now()));
+    }
+
 }
